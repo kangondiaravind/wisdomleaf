@@ -53,8 +53,6 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
         return apiResponses.size();
     }
 
-
-
     public class PhotoViewHolder extends RecyclerView.ViewHolder {
 
         TextView id;
