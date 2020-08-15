@@ -1,10 +1,12 @@
-package com.aravind.wisdomleaf;
+package com.aravind.wisdomleaf.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.aravind.wisdomleaf.R;
 
 public class SplashActivity extends AppCompatActivity {
 
