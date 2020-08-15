@@ -44,6 +44,12 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
         final ApiResponse apiResponse = apiResponses.get(position);
         holder.id.setText("Id:-  " + apiResponse.getId());
         holder.author.setText("Author:-  " + apiResponse.getAuthor());
+        Picasso.get()
+                .load(apiResponse.getDownload_url())
+                .centerCrop()
+                .fit()
+                .into(holder.image);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,13 +68,6 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
                 alert.show();
             }
         });
-
-        Picasso.get()
-                .load(apiResponse.getDownload_url())
-                .centerCrop()
-                .fit()
-                .into(holder.image);
-
     }
 
     @Override
