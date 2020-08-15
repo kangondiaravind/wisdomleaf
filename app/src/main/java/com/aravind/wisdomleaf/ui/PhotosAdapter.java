@@ -1,6 +1,8 @@
 package com.aravind.wisdomleaf.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +22,20 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
 
     private List<ApiResponse> apiResponses;
     private Context context;
+    AlertDialog.Builder builder;
 
     PhotosAdapter(List<ApiResponse> apiResponseList, Context context) {
         this.apiResponses = apiResponseList;
         this.context = context;
     }
 
+    View view;
+
     @NonNull
     @Override
     public PhotosAdapter.PhotoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.list_item, null);
+        view = layoutInflater.inflate(R.layout.list_item, null);
         return new PhotoViewHolder(view);
     }
 
@@ -39,6 +44,24 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
         final ApiResponse apiResponse = apiResponses.get(position);
         holder.id.setText("Id:-  " + apiResponse.getId());
         holder.author.setText("Author:-  " + apiResponse.getAuthor());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder = new AlertDialog.Builder(context);
+                builder.setMessage(apiResponse.getAuthor())
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Author");
+                alert.show();
+            }
+        });
 
         Picasso.get()
                 .load(apiResponse.getDownload_url())
